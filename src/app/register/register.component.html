@@ -1,0 +1,259 @@
+<div class="container mt-4">
+  <div class="card">
+    <h1>CONVENTION REGISTRATION</h1>
+    <form (submit)="save($event)" #registrationForm="ngForm">
+      <!-- Registration Type -->
+      <div class="form-group">
+        <label>Registration Type:</label>
+        <div>
+          <label><input type="radio" [(ngModel)]="registrationType" value="Full Registration" name="registrationType" [ngModelOptions]="{standalone: true}"> Full Registration</label>
+          <label><input type="radio" [(ngModel)]="registrationType" value="One Day Registration" name="registrationType" [ngModelOptions]="{standalone: true}"> One Day Registration</label>
+        </div>
+      </div>
+
+      <!-- Registration Category -->
+      <!-- Registration Category -->
+      <div class="form-group">
+        <label for="registrationCategory">Registration Category*:</label>
+        <select class="form-control dropdown" [(ngModel)]="registrationCategory" name="registrationCategory" #registrationCategoryModel="ngModel" required [ngClass]="{'is-invalid': registrationCategoryModel.touched && registrationCategoryModel.invalid}">
+          <option value="" disabled selected>Select Category</option>
+          <option value="FHRAI Member">FHRAI Member</option>
+          <option value="Non Member">Non Member</option>
+        </select>
+        <div *ngIf="registrationCategoryModel.touched && registrationCategoryModel.invalid" class="invalid-feedback">
+          Please select a registration category.
+        </div>
+      </div>
+
+
+      <!-- Membership No. -->
+      <div class="form-group">
+        <label for="membershipNo" class="required">Membership No. :</label>
+        <input type="text" class="form-control" id="membershipNo" [(ngModel)]="membershipNo" [ngModelOptions]="{standalone: true}" placeholder="Enter Membership No">
+      </div>
+
+      <!-- Name of Organisation -->
+      <div class="form-group">
+        <label for="nameOfOrganisation" class="required">Name of Organisation :</label>
+        <input type="text" class="form-control" id="nameOfOrganisation" [(ngModel)]="nameOfOrganisation" [ngModelOptions]="{standalone: true}" placeholder="Enter Organisation Name">
+      </div>
+
+      <!-- Address Lines -->
+      <div class="form-group">
+        <label for="addressLine1" class="required">Address Line 1 :</label>
+        <input type="text" class="form-control" id="addressLine1" [(ngModel)]="addressLine1" [ngModelOptions]="{standalone: true}" placeholder="Enter Address Line 1">
+      </div>
+      <div class="form-group">
+        <label for="addressLine2">Address Line 2 :</label>
+        <input type="text" class="form-control" id="addressLine2" [(ngModel)]="addressLine2" [ngModelOptions]="{standalone: true}" placeholder="Enter Address Line 2">
+      </div>
+      <div class="form-group">
+        <label for="addressLine3">Address Line 3 :</label>
+        <input type="text" class="form-control" id="addressLine3" [(ngModel)]="addressLine3" [ngModelOptions]="{standalone: true}" placeholder="Enter Address Line 3">
+      </div>
+
+      <!-- City, Pincode, and State -->
+      <div class="form-group">
+        <label for="city">City :</label>
+        <input type="text" class="form-control" id="city" [(ngModel)]="city" [ngModelOptions]="{standalone: true}" placeholder="Enter City">
+      </div>
+      <div class="form-group">
+        <label for="pincode" class="required">Pincode :</label>
+        <input type="text" class="form-control" id="pincode" [(ngModel)]="pincode" [ngModelOptions]="{standalone: true}" placeholder="Enter Pincode">
+      </div>
+      <!-- State Dropdown -->
+<div class="form-group">
+  <label for="state">State:</label>
+  <select class="form-control dropdown" [(ngModel)]="state" [ngModelOptions]="{standalone: true}">
+    <option value="" disabled selected>Select State</option>
+    <option value="Andhra Pradesh">Andhra Pradesh</option>
+    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+    <option value="Assam">Assam</option>
+    <option value="Bihar">Bihar</option>
+    <option value="Chhattisgarh">Chhattisgarh</option>
+    <option value="Goa">Goa</option>
+    <option value="Gujarat">Gujarat</option>
+    <option value="Haryana">Haryana</option>
+    <option value="Himachal Pradesh">Himachal Pradesh</option>
+    <option value="Jharkhand">Jharkhand</option>
+    <option value="Karnataka">Karnataka</option>
+    <option value="Kerala">Kerala</option>
+    <option value="Madhya Pradesh">Madhya Pradesh</option>
+    <option value="Maharashtra">Maharashtra</option>
+    <option value="Manipur">Manipur</option>
+    <option value="Meghalaya">Meghalaya</option>
+    <option value="Mizoram">Mizoram</option>
+    <option value="Nagaland">Nagaland</option>
+    <option value="Odisha">Odisha</option>
+    <option value="Punjab">Punjab</option>
+    <option value="Rajasthan">Rajasthan</option>
+    <option value="Sikkim">Sikkim</option>
+    <option value="Tamil Nadu">Tamil Nadu</option>
+    <option value="Telangana">Telangana</option>
+    <option value="Tripura">Tripura</option>
+    <option value="Uttar Pradesh">Uttar Pradesh</option>
+    <option value="Uttarakhand">Uttarakhand</option>
+    <option value="West Bengal">West Bengal</option>
+    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+    <option value="Chandigarh">Chandigarh</option>
+    <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+    <option value="Daman and Diu">Daman and Diu</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Lakshadweep">Lakshadweep</option>
+    <option value="Puducherry">Puducherry</option>
+  </select>
+</div>
+
+
+      <!-- STD Code and Phone -->
+      <div class="form-group">
+        <label for="stdCode">STD Code :</label>
+        <input type="text" class="form-control" id="stdCode" [(ngModel)]="stdCode" [ngModelOptions]="{standalone: true}" placeholder="Enter STD Code">
+      </div>
+      <div class="form-group">
+        <label for="phone" class="required">Phone:</label>
+        <input type="tel" class="form-control" id="phone" required
+               [(ngModel)]="phone" name="phone"
+               #phoneInput="ngModel" [ngModelOptions]="{standalone: true}"
+               pattern="[0-9]{10}" placeholder="Enter Phone Number"
+               (keypress)="validateNumber($event)">
+        <div *ngIf="phoneInput.errors && (phoneInput.dirty || phoneInput.touched)">
+          <small class="text-danger" *ngIf="phoneInput.errors.required">
+            Phone number is required.
+          </small>
+          <small class="text-danger" *ngIf="phoneInput.errors.pattern">
+            Please enter a valid phone number (exactly 10 digits).
+          </small>
+        </div>
+      </div>
+      
+    
+      
+      
+
+      <!-- GST No. and PAN No. -->
+      <div class="form-group">
+        <label for="gstNo">GST No. :</label>
+        <input type="text" class="form-control" id="gstNo" [(ngModel)]="gstNo" [ngModelOptions]="{standalone: true}" placeholder="ENTER GST NO">
+      </div>
+      <div class="form-group">
+        <label for="panNo" class="required">PAN No. :</label>
+        <input type="text" class="form-control" id="panNo" [(ngModel)]="panNo" name="panNo"
+               #panNoModel="ngModel" [ngModelOptions]="{standalone: true}"
+               pattern="[A-Z]{5}[0-9]{4}[A-Z]" required placeholder="ENTER PAN">
+        <div *ngIf="panNoModel.errors && (panNoModel.dirty || panNoModel.touched)">
+          <small class="text-danger" *ngIf="panNoModel.errors.required">
+            PAN number is required.
+          </small>
+          <small class="text-danger" *ngIf="panNoModel.errors.pattern">
+            Please enter a valid PAN number (e.g., ABAPG1559K).
+          </small>
+        </div>
+      </div>
+      
+
+      <!-- Legal Name of Business and Email -->
+      <div class="form-group">
+        <label for="legalNameOfBusiness">Legal Name of Business :</label>
+        <input type="text" class="form-control" id="legalNameOfBusiness" [(ngModel)]="legalNameOfBusiness" [ngModelOptions]="{standalone: true}" placeholder="Enter Legal Name of Business">
+      </div>
+      <div class="form-group">
+        <label for="emailIdForCommunication" class="required">Email Id For Communication :</label>
+        <input type="email" class="form-control" id="emailIdForCommunication"
+               [(ngModel)]="emailIdForCommunication" name="emailIdForCommunication"
+               #emailId="ngModel" [ngModelOptions]="{standalone: true}"
+               required email placeholder="Enter Email Id">
+        <div *ngIf="emailId.errors && (emailId.dirty || emailId.touched)">
+          <small class="text-danger" *ngIf="emailId.errors.required">
+            Email is required.
+          </small>
+          <small class="text-danger" *ngIf="emailId.errors.email">
+            Please enter a valid email address.
+          </small>
+        </div>
+      </div>
+      
+
+      <!-- Hotel Accommodation and PickUp And Drop -->
+      <div class="form-group">
+        <label>Hotel Accommodation:</label>
+        <div>
+          <label><input type="radio" [(ngModel)]="hotelAccommodation" value="Required" name="hotelAccommodation" [ngModelOptions]="{standalone: true}"> Required</label>
+          <label><input type="radio" [(ngModel)]="hotelAccommodation" value="Not Required" name="hotelAccommodation" [ngModelOptions]="{standalone: true}"> Not Required</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>PickUp And Drop:</label>
+        <div>
+          <label><input type="radio" [(ngModel)]="pickUpAndDrop" value="Required" name="pickUpAndDrop" [ngModelOptions]="{standalone: true}"> Required</label>
+          <label><input type="radio" [(ngModel)]="pickUpAndDrop" value="Not Required" name="pickUpAndDrop" [ngModelOptions]="{standalone: true}"> Not Required</label>
+        </div>
+      </div>
+
+      <!-- Additional Participant Information Table -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Name <span class="required">*</span></th>
+            <th>Designation <span class="required">*</span></th>
+            <th>Mobile <span class="required">*</span></th>
+            <th>Age <span class="required">*</span></th>
+            <th>Gender</th>
+            <th>Relation <span class="required">*</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <select class="form-control" [(ngModel)]="title" [ngModelOptions]="{standalone: true}">
+                <option value="" disabled selected>Select</option>
+                <option value="Mr">Mr</option>
+                <option value="Ms">Ms</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Dr">Dr</option>
+              </select>
+            </td>
+            <td>
+              <input type="text" class="form-control" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" placeholder="Enter Name">
+              <!-- Upload photo input -->
+              <input type="file" class="form-control mt-2" (change)="onFileSelected($event)">
+              <img [src]="photoPreview" *ngIf="photoPreview" class="img-thumbnail mt-2" style="width: 100px; height: auto;">
+            </td>
+            <td><input type="text" class="form-control" [(ngModel)]="designation" [ngModelOptions]="{standalone: true}" placeholder="Enter Designation"></td>
+            <td><input type="text" class="form-control" [(ngModel)]="mobile" [ngModelOptions]="{standalone: true}" placeholder="Enter Mobile No."></td>
+            <td><input type="number" class="form-control" [(ngModel)]="age" [ngModelOptions]="{standalone: true}" placeholder="Enter Age"></td>
+            <td>
+              <select class="form-control dropdown" [(ngModel)]="gender" [ngModelOptions]="{standalone: true}">
+                <option value="" disabled selected>Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </td>
+            <td>
+              <select class="form-control dropdown" [(ngModel)]="relation" [ngModelOptions]="{standalone: true}">
+                <option value="" disabled selected>Select</option>
+                <option value="Self">Self</option>
+                <option value="Spouse">Spouse</option>
+                <option value="Child">Child</option>
+                <option value="Friend">Friend</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+
+      
+      <!-- Submit Button -->
+       <!-- Submit Button -->
+       <button type="submit" class="btn btn-primary mt-4" [disabled]="!registrationForm.valid">Register</button>
+
+       <!-- Error Messages -->
+       <div *ngIf="registrationForm.submitted && !registrationForm.valid" class="alert alert-danger">
+         Failed to register. Please complete all the compulsory fields.
+       </div>
+     </form>
+   </div>
+ </div>

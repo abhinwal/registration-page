@@ -1,0 +1,14 @@
+
+  .required:after {
+    content: "*";
+    color: red;
+  }
+  .form-control.dropdown {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url('data:image/svg+xml;charset=US-ASCII,<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 12,0 6,12" style="fill: black;" /></svg>') no-repeat right .75rem center;
+    padding-right: 30px; /* Make space for the background image */
+  }
+/* register.component.css */
+
